@@ -1,0 +1,15 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  color: #1f2937;
+}
+
+input,
+button {
+  font: inherit;
+  padding: 8px;
+}
+
+a {
+  color: #4338ca;
+}
