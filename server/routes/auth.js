@@ -42,6 +42,7 @@ router.post("/register", async (req, res) => {
       id: user._id,
       name: user.name,
       email: user.email,
+      role: user.role,
     });
   } catch (err) {
     if (err.code === 11000) {
