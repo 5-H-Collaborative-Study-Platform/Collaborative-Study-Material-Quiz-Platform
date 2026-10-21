@@ -10,9 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/questions", require("./routes/questions"));
+app.use("/api/materials", require("./routes/materials"));
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
-
-// app.use("/api/auth", require("./routes/auth")); // Bharat enables this
 
 const PORT = process.env.PORT || 5000;
 
