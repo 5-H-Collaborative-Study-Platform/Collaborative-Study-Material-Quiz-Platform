@@ -11,7 +11,9 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/questions", require("./routes/questions"));
 app.use("/api/materials", require("./routes/materials"));
+app.use("/api/quizzes", require("./routes/quizzes"));
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
+
 
 const PORT = process.env.PORT || 5000;
 
