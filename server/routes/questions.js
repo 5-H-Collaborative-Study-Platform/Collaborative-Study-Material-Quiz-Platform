@@ -1,9 +1,52 @@
+
 const express = require("express");
 const Question = require("../models/Question");
 const auth = require("../middleware/auth");
 
 const router = express.Router();
 
+// Search and filter questions.
+router.get("/", auth, async (req, res) => {
+  const { subject, topic, difficulty, q } = req.query;
+
+  if (
+    difficulty !== undefined &&
+    !["easy", "medium", "hard"].includes(difficulty)
+  ) {
+    return res.status(400).json({
+      error: "Difficulty must be easy, medium or hard",
+    });
+  }
+
+  const filter = {};
+
+  if (subject !== undefined && subject.trim()) {
+    filter.subject = subject.trim();
+  }
+
+  if (topic !== undefined && topic.trim()) {
+    filter.topic = topic.trim();
+  }
+
+  if (difficulty !== undefined) {
+    filter.difficulty = difficulty;
+  }
+
+  if (q !== undefined && q.trim()) {
+    const escapedQuery = q.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    filter.text = { $regex: escapedQuery, $options: "i" };
+  }
+
+  try {
+    const questions = await Question.find(filter).sort({ createdAt: -1 });
+    return res.status(200).json(questions);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Question search failed" });
+  }
+});
+
+// Create a question.
 router.post("/", auth, async (req, res) => {
   const { text, options, correctAnswer, subject, topic, difficulty, type } =
     req.body || {};
@@ -25,7 +68,8 @@ router.post("/", auth, async (req, res) => {
 
   if (
     options !== undefined &&
-    (!Array.isArray(options) || options.some((option) => typeof option !== "string"))
+    (!Array.isArray(options) ||
+      options.some((option) => typeof option !== "string"))
   ) {
     return res.status(400).json({ error: "Options must be an array of strings" });
   }
