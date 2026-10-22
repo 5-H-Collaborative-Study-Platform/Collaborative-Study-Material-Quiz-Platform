@@ -50,4 +50,21 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const quiz = await Quiz.findById(req.params.id).populate(
+      "questions",
+      "-correctAnswer"
+    );
+
+    if (!quiz) {
+      return res.status(404).json({ error: "Quiz not found" });
+    }
+
+    return res.json(quiz);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch quiz" });
+  }
+});
+
 module.exports = router;
