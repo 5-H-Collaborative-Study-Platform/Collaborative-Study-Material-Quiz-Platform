@@ -48,4 +48,11 @@ router.get("/", async (req, res) => {
   res.json(materials);
 });
 
+// GET /api/materials/:id/download
+router.get("/:id/download", async (req, res) => {
+  const material = await Material.findById(req.params.id);
+  if (!material) return res.status(404).json({ error: "Material not found" });
+  res.download(material.filePath, material.fileName);
+});
+
 module.exports = router;
