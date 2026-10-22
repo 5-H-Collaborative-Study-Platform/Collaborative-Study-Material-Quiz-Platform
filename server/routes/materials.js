@@ -33,4 +33,19 @@ router.post("/", auth, (req, res) => {
   });
 });
 
+// GET /api/materials?subject=&topic=&q=
+router.get("/", async (req, res) => {
+  const { subject, topic, q } = req.query;
+  const filter = {};
+  if (subject) filter.subject = subject;
+  if (topic) filter.topic = topic;
+  if (q && q.trim()) {
+    const escaped = q.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    filter.title = { $regex: escaped, $options: "i" };
+  }
+
+  const materials = await Material.find(filter).sort({ createdAt: -1 });
+  res.json(materials);
+});
+
 module.exports = router;
