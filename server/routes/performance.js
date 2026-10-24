@@ -12,4 +12,25 @@ router.get("/me", auth, async (req, res) => {
   res.json({ attempts: attempts.length, averageScore });
 });
 
+// GET /api/performance/by-topic  ->  [{ topic, attempts, averageScore }]
+router.get("/by-topic", auth, async (req, res) => {
+  const attempts = await Attempt.find({ user: req.user.id }).populate(
+    "quiz",
+    "topic",
+  );
+  const byTopic = {};
+  for (const a of attempts) {
+    const topic = a.quiz ? a.quiz.topic : "unknown";
+    byTopic[topic] = byTopic[topic] || { topic, total: 0, count: 0 };
+    byTopic[topic].total += a.score || 0;
+    byTopic[topic].count += 1;
+  }
+  const result = Object.values(byTopic).map((t) => ({
+    topic: t.topic,
+    attempts: t.count,
+    averageScore: t.total / t.count,
+  }));
+  res.json(result);
+});
+
 module.exports = router;
