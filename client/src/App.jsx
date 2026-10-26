@@ -4,6 +4,7 @@ import Home from "./pages/Home.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import AddQuestion from "./pages/AddQuestion.jsx";
+import Questions from "./pages/Questions.jsx";
 
 export default function App() {
   return (
@@ -12,9 +13,10 @@ export default function App() {
       <main style={{ padding: 24 }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/questions/new" element={<AddQuestion />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/questions" element={<Questions />} />
+          <Route path="/questions/new" element={<AddQuestion />} />
         </Routes>
       </main>
     </BrowserRouter>

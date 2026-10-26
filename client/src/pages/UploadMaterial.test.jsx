@@ -1,9 +1,19 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { vi, afterEach, test, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { beforeEach, afterEach, test, expect, vi } from "vitest";
 import UploadMaterial from "./UploadMaterial.jsx";
 
-afterEach(() => {
+beforeEach(() => {
   vi.restoreAllMocks();
+  vi.stubGlobal("localStorage", {
+    getItem: () => "test-token",
+    setItem: () => {},
+    removeItem: () => {},
+  });
+  vi.stubGlobal("fetch", vi.fn());
+});
+
+afterEach(() => {
+  vi.unstubAllGlobals();
 });
 
 test("upload form shows all fields", () => {
@@ -22,12 +32,11 @@ test("shows an error when no file is chosen", () => {
   fireEvent.change(screen.getByPlaceholderText("Topic"), { target: { value: "Algebra" } });
   fireEvent.click(screen.getByText("Upload material"));
   expect(screen.getByRole("alert")).toHaveTextContent(/file/i);
+  expect(fetch).not.toHaveBeenCalled();
 });
 
 test("uploads successfully and shows a success message", async () => {
-  globalThis.fetch = vi.fn(() =>
-    Promise.resolve({ ok: true, json: () => Promise.resolve({}) })
-  );
+  fetch.mockResolvedValue({ ok: true, json: () => Promise.resolve({}) });
 
   render(<UploadMaterial />);
   fireEvent.change(screen.getByPlaceholderText("Title"), { target: { value: "Notes" } });
@@ -39,10 +48,10 @@ test("uploads successfully and shows a success message", async () => {
 
   fireEvent.click(screen.getByText("Upload material"));
 
-  await waitFor(() => {
-    expect(screen.getByRole("status")).toHaveTextContent(/uploaded/i);
-  });
-  expect(globalThis.fetch).toHaveBeenCalledWith(
+  expect(
+    await screen.findByRole("status", {}, { timeout: 3000 })
+  ).toHaveTextContent(/uploaded/i);
+  expect(fetch).toHaveBeenCalledWith(
     "/api/materials",
     expect.objectContaining({ method: "POST" })
   );
