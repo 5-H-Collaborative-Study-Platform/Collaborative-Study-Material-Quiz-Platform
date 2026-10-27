@@ -33,4 +33,12 @@ router.get("/by-topic", auth, async (req, res) => {
   res.json(result);
 });
 
+// GET /api/performance/over-time  ->  [{ score, submittedAt }] oldest first
+router.get("/over-time", auth, async (req, res) => {
+  const attempts = await Attempt.find({ user: req.user.id })
+    .sort({ submittedAt: 1 })
+    .select("score submittedAt");
+  res.json(attempts.map((a) => ({ score: a.score, submittedAt: a.submittedAt })));
+});
+
 module.exports = router;
