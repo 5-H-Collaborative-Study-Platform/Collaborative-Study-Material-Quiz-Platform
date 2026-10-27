@@ -14,6 +14,7 @@ app.use("/api/materials", require("./routes/materials"));
 app.use("/api/quizzes", require("./routes/quizzes"));
 app.use("/api/attempts", require("./routes/attempts"));
 app.use("/api/performance", require("./routes/performance"));
+app.use("/api/feedback", require("./routes/feedback"));
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
 
