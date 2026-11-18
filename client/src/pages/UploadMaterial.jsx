@@ -70,6 +70,7 @@ export default function UploadMaterial() {
   return (
     <div className="container page fade-in">
       <div style={{ maxWidth: "560px", margin: "1rem auto 3rem" }}>
+        {/* Navigation Breadcrumb */}
         <div style={{ marginBottom: "1.25rem" }}>
           <a
             href="/materials"
