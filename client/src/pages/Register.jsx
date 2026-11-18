@@ -23,6 +23,11 @@ export default function Register() {
       if (res.ok) {
         setIsSuccess(true);
         setMsg(`Registered as ${data.email}`);
+        setTimeout(() => {
+          if (typeof window !== "undefined") {
+            window.location.href = "/login";
+          }
+        }, 1200);
       } else {
         setIsSuccess(false);
         setMsg(data.error || "Registration failed");

@@ -126,7 +126,6 @@ export default function Questions() {
 
   return (
     <div className="container page fade-in">
-      {/* Top Header */}
       <div
         style={{
           display: "flex",
@@ -186,7 +185,6 @@ export default function Questions() {
         </div>
       </div>
 
-      {/* Filter and Search Bar */}
       <div
         className="card card-body"
         style={{
@@ -253,7 +251,6 @@ export default function Questions() {
         </div>
       </div>
 
-      {/* Questions List */}
       {loading ? (
         <div className="loading-page" style={{ minHeight: "30vh" }}>
           <span className="spinner"></span>
@@ -434,7 +431,6 @@ export default function Questions() {
         </>
       )}
 
-      {/* Create Quiz Modal */}
       {quizModalOpen && (
         <div
           style={{

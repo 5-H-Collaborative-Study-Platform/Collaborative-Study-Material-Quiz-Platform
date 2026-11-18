@@ -42,7 +42,6 @@ export default function Home() {
 
   return (
     <div className="fade-in">
-      {/* Hero Section */}
       <section
         style={{
           textAlign: "center",
@@ -188,7 +187,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Grid */}
       <section style={{ maxWidth: "1000px", margin: "0 auto", padding: "3.5rem 1.5rem 4rem" }}>
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
           <h2

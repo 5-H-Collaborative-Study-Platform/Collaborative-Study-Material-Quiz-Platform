@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// eslint-disable-next-line react/prop-types
 export default function AttemptQuiz({ quizId = "demo" }) {
   const [quiz, setQuiz] = useState(null);
   const [answers, setAnswers] = useState({});
@@ -181,7 +180,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
   return (
     <div className="container page fade-in">
       <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-        {/* Quiz Sticky Header */}
         <div
           className="card"
           style={{
@@ -213,7 +211,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
               <h2 style={{ fontSize: "1.35rem", margin: 0 }}>{quiz.title}</h2>
             </div>
 
-            {/* Timer badge */}
             <div
               role="timer"
               style={{
@@ -242,7 +239,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
             </div>
           </div>
 
-          {/* Progress bar */}
           <div style={{ marginTop: "1rem" }}>
             <div
               style={{
@@ -280,7 +276,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
           </div>
         </div>
 
-        {/* Completion Result Card */}
         {done && (
           <div
             className="card card-body"
@@ -375,7 +370,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
               </a>
             </div>
 
-            {/* Quiz Feedback Section */}
             <div
               style={{
                 marginTop: "2rem",
@@ -440,7 +434,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
           </div>
         )}
 
-        {/* Questions list */}
         <div
           style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
         >
@@ -558,7 +551,6 @@ export default function AttemptQuiz({ quizId = "demo" }) {
           ))}
         </div>
 
-        {/* Submit Actions */}
         {!done && (
           <div
             style={{

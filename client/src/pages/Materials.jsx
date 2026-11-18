@@ -93,7 +93,6 @@ export default function Materials() {
 
   return (
     <div className="container page fade-in">
-      {/* Header section */}
       <div
         style={{
           display: "flex",
@@ -132,7 +131,6 @@ export default function Materials() {
         </a>
       </div>
 
-      {/* Search & Filter Toolbar */}
       <div
         className="card card-body"
         style={{
@@ -176,7 +174,6 @@ export default function Materials() {
           </button>
         </form>
 
-        {/* Subject Filter Chips */}
         {subjects.length > 2 && (
           <div
             style={{
@@ -229,7 +226,6 @@ export default function Materials() {
         )}
       </div>
 
-      {/* Materials List / Grid */}
       {loading ? (
         <div className="loading-page" style={{ minHeight: "30vh" }}>
           <span className="spinner"></span>
@@ -431,7 +427,6 @@ export default function Materials() {
         </ul>
       )}
 
-      {/* Feedback Modal */}
       {feedbackModal && (
         <div
           style={{
