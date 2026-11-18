@@ -1,4 +1,3 @@
-
 import { render, screen, waitFor } from "@testing-library/react";
 import Questions from "./Questions.jsx";
 

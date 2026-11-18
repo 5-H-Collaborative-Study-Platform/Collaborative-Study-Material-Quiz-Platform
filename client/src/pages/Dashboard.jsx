@@ -6,7 +6,8 @@ export default function Dashboard() {
   const [summary, setSummary] = useState({ attempts: 0, averageScore: 0 });
 
   useEffect(() => {
-    const headers = { Authorization: `Bearer ${localStorage.getItem("token")}` };
+    const token = typeof window !== "undefined" && window.localStorage ? window.localStorage.getItem("token") : "";
+    const headers = { Authorization: `Bearer ${token}` };
     fetch("/api/performance/over-time", { headers }).then(
       (r) =>
         r.ok &&

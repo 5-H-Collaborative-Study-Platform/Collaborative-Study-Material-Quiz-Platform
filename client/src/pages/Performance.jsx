@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 function getToken() {
   try {
@@ -67,8 +66,8 @@ export default function Performance() {
           <p style={{ color: "var(--color-gray-500)", marginBottom: "1.5rem" }}>
             Please log in with your account to view your quiz performance, topic mastery, and score history.
           </p>
-          <Link
-            to="/login"
+          <a
+            href="/login"
             style={{
               display: "inline-flex",
               padding: "0.625rem 1.5rem",
@@ -80,7 +79,7 @@ export default function Performance() {
             }}
           >
             Go to Login
-          </Link>
+          </a>
         </div>
       </div>
     );
@@ -111,7 +110,6 @@ export default function Performance() {
         </div>
       )}
 
-      {/* Summary KPI Cards */}
       <div
         style={{
           display: "grid",
@@ -206,8 +204,8 @@ export default function Performance() {
           <p style={{ maxWidth: "420px", margin: "0 auto 1.5rem" }}>
             Take practice quizzes to evaluate your knowledge and view your learning insights here.
           </p>
-          <Link
-            to="/questions"
+          <a
+            href="/questions"
             style={{
               display: "inline-flex",
               padding: "0.625rem 1.25rem",
@@ -219,11 +217,10 @@ export default function Performance() {
             }}
           >
             Explore Question Bank
-          </Link>
+          </a>
         </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "1.5rem" }}>
-          {/* Performance by Topic */}
           <div className="card card-body">
             <h3 style={{ fontSize: "1.125rem", marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <span>📑</span> Performance by Topic
@@ -281,7 +278,6 @@ export default function Performance() {
             )}
           </div>
 
-          {/* Recent Quiz Attempts */}
           <div className="card card-body">
             <h3 style={{ fontSize: "1.125rem", marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <span>🕒</span> Recent Attempts
